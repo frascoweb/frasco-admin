@@ -1,0 +1,14 @@
+{% use_layout "admin/layout.html" %}
+
+<div class="row">
+  <div class="col-lg-3">
+    <{ admin_counter_widget label="Servers" value=3 icon="tasks" icon_color="red" }/>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <{ admin_widget title="hello world" icon="tasks" actions=[("Manage", "#"), ("Refresh", "#")] }>
+      hello world
+    </{ admin_widget }>
+  </div>
+</div>
