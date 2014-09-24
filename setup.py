@@ -5,6 +5,9 @@ def desc():
     with open("README.md") as f:
         return f.read()
 
+def reqs():
+    with open('requirements.txt') as f:
+        return f.read().splitlines()
 
 setup(
     name='frasco-admin',
@@ -19,11 +22,10 @@ setup(
     include_package_data=True,
     zip_safe=False,
     platforms='any',
-    install_requires=[
+    install_requires=reqs() + [
         'frasco',
         'frasco-bootstrap',
         'frasco-users',
-        'frasco-users-acl',
-        'inflection'
+        'frasco-users-acl'
     ]
 )
