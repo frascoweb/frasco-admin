@@ -1,4 +1,4 @@
-from frasco import Blueprint, current_context, pass_feature, ActionsView, ActionsFunctionViewMixin
+from frasco import Blueprint, current_context, pass_feature, ActionsView
 import inflection
 
 
@@ -23,12 +23,8 @@ class AdminView(ActionsView):
         return super(AdminView, self).dispatch_request(*args, **kwargs)
 
 
-class AdminFunctionView(ActionsFunctionViewMixin, AdminView):
-    pass
-
-
 class AdminBlueprint(Blueprint):
-    view_class = AdminFunctionView
+    view_class = AdminView
 
     def __init__(self, *args, **kwargs):
         self.roles = kwargs.pop("roles", [])
