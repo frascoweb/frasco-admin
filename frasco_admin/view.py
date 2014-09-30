@@ -1,4 +1,4 @@
-from frasco import Blueprint, current_context, pass_feature, ActionsView
+from frasco import Blueprint, current_context, pass_feature, ActionsView, hook, current_app
 import inflection
 
 
@@ -10,12 +10,14 @@ class AdminView(ActionsView):
         self.sidebar_menu_icon = kwargs.pop("admin_menu_icon", None)
         super(AdminView, self).__init__(*args, **kwargs)
 
-    def register(self, app, bp=None):
+    def register(self, target):
         if self.sidebar_menu:
-            endpoint = (bp.name + "." if bp else "") + self.name
-            app.features.menu["admin"].add_child(endpoint, self.sidebar_menu,
+            endpoint = self.name
+            if isinstance(target, Blueprint):
+                endpoint = target.name + "." + self.name
+            current_app.features.menu["admin"].add_child(endpoint, self.sidebar_menu,
                 endpoint, icon=self.sidebar_menu_icon)
-        super(AdminView, self).register(app, bp)
+        super(AdminView, self).register(target)
 
     def dispatch_request(self, *args, **kwargs):
         current_context["admin_section_title"] = self.title or inflection.humanize(self.name)
@@ -29,8 +31,8 @@ class AdminBlueprint(Blueprint):
     def __init__(self, *args, **kwargs):
         self.roles = kwargs.pop("roles", [])
         super(AdminBlueprint, self).__init__(*args, **kwargs)
-        self.before_request(self.init_admin)
 
+    @hook('before_request')
     @pass_feature("admin", "users", "users_acl")
     def init_admin(self, admin, users, users_acl):
         users.login_required()
