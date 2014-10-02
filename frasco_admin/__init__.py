@@ -38,7 +38,7 @@ class AdminFeature(Feature):
 
     def make_superadmin(self, user):
         user.roles.append(self.options["superadmin_role"])
-        self.app.features.models.save(user)
+        user.save()
 
     def register_blueprint(self, bp):
         if isinstance(bp, str):
