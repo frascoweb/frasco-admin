@@ -1,4 +1,4 @@
-from frasco import Blueprint, current_context, pass_feature, ActionsView, hook, current_app
+from frasco import Blueprint, current_context, pass_feature, ActionsView, hook, current_app, abort
 import inflection
 
 
@@ -29,17 +29,14 @@ class AdminBlueprint(Blueprint):
     view_class = AdminView
 
     def __init__(self, *args, **kwargs):
-        self.roles = kwargs.pop("roles", [])
         super(AdminBlueprint, self).__init__(*args, **kwargs)
 
+    def is_user_allowed(self, user):
+        return True
+
     @hook('before_request')
-    @pass_feature("admin", "users", "users_acl")
-    def init_admin(self, admin, users, users_acl):
+    @pass_feature("admin", "users")
+    def init_admin(self, admin, users):
         users.login_required()
-        if not users_acl.check_user_role(admin.options["superadmin_role"]):
-            if not users_acl.check_user_role([admin.options["admin_role"]] + self.roles):
-                username = getattr(users.current, users.options["username_column"], None)
-                if username in admin.options["superadmins"]:
-                    admin.make_superadmin(users.current)
-                else:
-                    current_context.exit(users_acl.unauthorized())
+        if not admin.is_admin(users.current) or not self.is_user_allowed(users.current):
+            abort(404)

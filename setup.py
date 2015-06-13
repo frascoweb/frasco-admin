@@ -20,10 +20,9 @@ setup(
     zip_safe=False,
     platforms='any',
     install_requires=[
-        # 'frasco',
-        # 'frasco-bootstrap',
-        # 'frasco-users',
-        # 'frasco-users-acl',
+        'frasco',
+        'frasco-bootstrap',
+        'frasco-users',
         'inflection'
     ]
 )
