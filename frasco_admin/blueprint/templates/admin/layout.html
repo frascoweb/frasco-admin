@@ -23,19 +23,11 @@
           <li class="sidebar-title separator"><span>{{ item.label }}</span></li>
           {% elif item.is_visible() %}
           <li class="sidebar-list {{ 'active' if item.is_current() else '' }}">
-            <a href="{{ item.url() }}">{{ item.label }}{% if item.icon %} <span class="menu-icon fa fa-{{ item.icon }}"></span>{% endif %}</a>
+            <a href="{{ item.url() }}">{{ item.label }}{% if item.icon %} <{ico item.icon class_="menu-icon" }/>{% endif %}</a>
           </li>
           {% endif %}
         {% endfor %}
       </ul>
-      <div class="sidebar-footer">
-        <div class="col-xs-4">
-          <a href="http://getfrasco.com" target="_blank">Frasco</a>
-        </div>
-        <div class="col-xs-4">
-          <a href="http://getfrasco.com/help/admin" target="_blank">Help</a>
-        </div>
-      </div>
     </div>
 
     <!-- End Sidebar -->

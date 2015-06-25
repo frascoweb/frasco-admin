@@ -5,7 +5,7 @@
     <div class="widget-body">
       {% if icon %}
       <div class="widget-icon {{ icon_color }} pull-left">
-        <i class="fa fa-{{ icon }}"></i>
+        <{ico icon }/>
       </div>
       {% endif %}
       <div class="widget-content pull-left">
@@ -21,9 +21,12 @@
 {% macro admin_widget(title, icon=None, actions=None, height=None, padding=True, searchform=False) -%}
   {{ html_tag("div", class_="widget " + kwargs.pop("class_", ""), **kwargs) }}
     <div class="widget-title">
-      {% if icon %}<i class="fa fa-{{ icon }}"></i> {% endif %}{{ title }}
+      {% if icon %}<{ico icon }/> {% endif %}{{ title }}
       {% if searchform %}
-        <input type="text" placeholder="Search" class="form-control input-sm pull-right">
+        <form action="" class="pull-right">
+          <input type="text" name="search" placeholder="Search" class="form-control input-sm"
+            value="{{ request.args.get('search', '') }}">
+        </form>
       {% endif %}
       {% if actions %}
         {% for label, url in actions %}
@@ -38,11 +41,18 @@
 {%- endmacro %}
 
 
-{% macro admin_table_widget(title) -%}
+{% macro admin_table_widget(title, columns=None) -%}
   {% set c = caller %}
   {% call admin_widget(title, padding=False, **kwargs) %}
     <div class="table-responsive">
       <table class="table">
+        {% if columns %}
+          <thead>
+            {% for col in columns %}
+            <th>{{ col }}</th>
+            {% endfor %}
+          </thead>
+        {% endif %}
         {{ c() }}
       </table>
     </div>

@@ -291,8 +291,10 @@
   .widget .widget-title i {
     margin-right: 5px;
   }
-  .widget .widget-title input {
+  .widget .widget-title form {
     width: 25%;
+    display: inline-block;
+    margin-left: 5px;
   }
   .widget .widget-title .btn.pull-right {
     margin-left: 5px;
@@ -369,4 +371,11 @@ ul.sidebar .sidebar-list a:hover,
 ul.sidebar .sidebar-title {
   /* Sidebar title text colour */
   color: #627cb7;
+}
+
+#dashboard-counters > .widget {
+  width: 240px;
+  height: 107px;
+  float: left;
+  margin-right: 10px;
 }

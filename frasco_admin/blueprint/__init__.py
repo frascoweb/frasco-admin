@@ -1,4 +1,5 @@
 from ..view import AdminBlueprint
+from frasco import current_context
 
 
 admin_bp = AdminBlueprint("admin", __name__, template_folder="templates", static_folder="static")
