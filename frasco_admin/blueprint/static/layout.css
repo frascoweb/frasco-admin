@@ -22,12 +22,12 @@
     margin-bottom: 0px;
   }
   #page-wrapper {
-    padding-left: 70px;
+    padding-left: 50px;
     height: 100%
   }
   #sidebar-wrapper {
     margin-left: -150px;
-    left: -30px;
+    left: -50px;
     width: 250px;
     position: fixed;
     height: 100%;
@@ -75,7 +75,12 @@
     display: block;
     float: left;
     text-decoration: none;
-    width: 250px;  
+    width: 250px;
+    padding-right: 52px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
   }
   ul.sidebar .sidebar-main {
     height: 65px;
@@ -85,10 +90,11 @@
     line-height: 60px;
   }
   ul.sidebar .sidebar-main .menu-icon {
-    float: right;
     font-size: 18px;
-    padding-right: 28px;
+    padding-right: 18px;
     line-height: 60px;
+    position: absolute;
+    right: 0;
   }
   ul.sidebar .sidebar-title {
     font-size: 12px;
@@ -112,6 +118,7 @@
     font-size: 15px;
     color: #b2bfdc;
     line-height: 40px;
+    position: relative;
   }
   ul.sidebar .sidebar-list a:hover {
     color: #fff;
@@ -123,10 +130,10 @@
     text-indent: 22px;
   }
   ul.sidebar .sidebar-list .menu-icon {
-    float: right;
-    padding-right: 29px;
+    padding-right: 18px;
     line-height: 40px;
-    width: 70px;
+    position: absolute;
+    right: 0;
   }
   ul.sidebar .sidebar-list a:hover .menu-icon {
     text-indent: 25px;

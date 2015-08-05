@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='frasco-admin',
-    version='0.2',
+    version='0.2.1',
     url='http://github.com/frascoweb/frasco-admin',
     license='MIT',
     author='Maxime Bouroumeau-Fuseau',
@@ -22,7 +22,6 @@ setup(
     install_requires=[
         'frasco',
         'frasco-bootstrap',
-        'frasco-users',
         'inflection'
     ]
 )

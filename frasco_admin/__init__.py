@@ -7,7 +7,7 @@ import os
 
 class AdminFeature(Feature):
     name = "admin"
-    requires = ["users", "bootstrap"]
+    requires = ["bootstrap"]
     blueprints = [admin_bp]
     view_files = [("admin/*", AdminView)]
     defaults = {"url_prefix": "/admin",
